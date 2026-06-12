@@ -1,0 +1,11 @@
+# Dépendances
+node_modules/
+
+# Variables d'environnement (identifiants BD, secret de session, clés PayPal)
+.env
+
+# Fichiers système macOS
+.DS_Store
+
+# Logs
+*.log

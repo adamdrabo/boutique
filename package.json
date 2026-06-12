@@ -1,0 +1,33 @@
+{
+  "name": "boutique",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+ "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamdrabo/boutique.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/adamdrabo/boutique/issues"
+  },
+  "homepage": "https://github.com/adamdrabo/boutique#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mysql2": "^3.22.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

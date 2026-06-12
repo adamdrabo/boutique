@@ -1,0 +1,219 @@
+/* ---------- Reset & base ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #FDF6EC; /* crème léger, fait ressortir le blanc des cartes */
+    color: #2B2B2B;
+    line-height: 1.6;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+    background-color: #F77F00;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.navbar .logo {
+    color: #FFFFFF;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-liens a {
+    color: #FFFFFF;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 500;
+}
+
+.nav-liens a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- Catalogue ---------- */
+.catalogue {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.catalogue h1 {
+    color: #F77F00;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid #009A44;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+}
+
+.grille-produits {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ---------- Carte produit ---------- */
+.carte-produit {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.carte-produit:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.carte-produit img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+    background-color: #FDF6EC; /* visible tant que les images manquent */
+}
+
+.badge-categorie {
+    align-self: flex-start;
+    background-color: #009A44;
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    margin: 0.6rem 0 0.4rem;
+}
+
+.carte-produit h2 {
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+}
+
+.carte-produit .description {
+    font-size: 0.85rem;
+    color: #666;
+    flex-grow: 1; /* pousse prix/bouton vers le bas : cartes alignées */
+}
+
+.carte-produit .prix {
+    color: #F77F00;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0.5rem 0 0.2rem;
+}
+
+.stock {
+    font-size: 0.8rem;
+    color: #009A44;
+    margin-bottom: 0.6rem;
+}
+
+.stock.rupture {
+    color: #C0392B;
+    font-weight: bold;
+}
+
+/* ---------- Boutons ---------- */
+button {
+    background-color: #F77F00;
+    color: #FFFFFF;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.15s ease;
+}
+
+button:hover {
+    background-color: #D96E00;
+}
+
+/* ---------- Footer ---------- */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    background-color: #009A44;
+    color: #FFFFFF;
+    font-size: 0.85rem;
+}
+
+/* ---------- Formulaires d'authentification ---------- */
+.formulaire-auth {
+    max-width: 420px;
+    margin: 3rem auto;
+    background-color: #FFFFFF;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.formulaire-auth h1 {
+    color: #F77F00;
+    margin-bottom: 1.2rem;
+}
+
+.formulaire-auth label {
+    display: block;
+    margin-top: 0.8rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.formulaire-auth input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.3rem;
+    border: 1px solid #DDD;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.formulaire-auth input:focus {
+    outline: 2px solid #009A44;
+    border-color: transparent;
+}
+
+.formulaire-auth button {
+    margin-top: 1.4rem;
+}
+
+.message-erreur {
+    background-color: #FDECEA;
+    color: #C0392B;
+    padding: 0.6rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+}
+
+.lien-alternatif {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.lien-alternatif a,
+.nav-bonjour {
+    color: #009A44;
+    font-weight: 600;
+}
+
+.nav-bonjour {
+    color: #FFFFFF;
+    margin-left: 1.5rem;
+    opacity: 0.9;
+}

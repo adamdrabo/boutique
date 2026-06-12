@@ -1,0 +1,29 @@
+<%- include('components/header') %>
+
+<main class="catalogue">
+    <h1>Nos produits</h1>
+
+    <div class="grille-produits">
+        <% produits.forEach(produit => { %>
+            <article class="carte-produit">
+                <img src="<%= produit.image_url %>" alt="<%= produit.nom %>">
+                <span class="badge-categorie"><%= produit.categorie %></span>
+                <h2><%= produit.nom %></h2>
+                <p class="description"><%= produit.description %></p>
+                <p class="prix"><%= produit.prix %> $</p>
+
+                <% if (produit.quantite_stock > 0) { %>
+                    <p class="stock">En stock : <%= produit.quantite_stock %></p>
+                    <form action="/panier/ajouter" method="post">
+                        <input type="hidden" name="produitId" value="<%= produit.id %>">
+                        <button type="submit">Ajouter au panier</button>
+                    </form>
+                <% } else { %>
+                    <p class="stock rupture">Rupture de stock</p>
+                <% } %>
+            </article>
+        <% }) %>
+    </div>
+</main>
+
+<%- include('components/footer') %>

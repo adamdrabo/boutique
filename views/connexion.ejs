@@ -1,0 +1,23 @@
+<%- include('components/header') %>
+
+<main class="formulaire-auth">
+    <h1>Connexion</h1>
+
+    <% if (erreur) { %>
+        <p class="message-erreur"><%= erreur %></p>
+    <% } %>
+
+    <form action="/connexion" method="post">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="motDePasse">Mot de passe</label>
+        <input type="password" id="motDePasse" name="motDePasse" required>
+
+        <button type="submit">Se connecter</button>
+    </form>
+
+    <p class="lien-alternatif">Pas de compte? <a href="/inscription">S'inscrire</a></p>
+</main>
+
+<%- include('components/footer') %>
