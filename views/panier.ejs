@@ -1,0 +1,57 @@
+<%- include('components/header') %>
+
+<main class="panier">
+    <h1>Mon panier</h1>
+
+    <% if (articles.length === 0) { %>
+        <p class="panier-vide">Votre panier est vide.</p>
+        <a href="/produits" class="btn-continuer">Voir les produits</a>
+    <% } else { %>
+
+        <table class="table-panier">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Prix unitaire</th>
+                    <th>Quantité</th>
+                    <th>Sous-total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <% articles.forEach(article => { %>
+                    <tr>
+                        <td class="cellule-produit">
+                            <img src="<%= article.image_url %>" alt="<%= article.nom %>">
+                            <span><%= article.nom %></span>
+                        </td>
+                        <td><%= article.prix.toFixed(2) %> $</td>
+                        <td><%= article.quantite %></td>
+                        <td><%= article.sousTotal.toFixed(2) %> $</td>
+                        <td>
+                            <form action="/panier/retirer" method="post">
+                                <input type="hidden" name="produitId" value="<%= article.id %>">
+                                <button type="submit" class="btn-retirer">Retirer</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="total-label">Total</td>
+                    <td class="total-valeur"><%= total.toFixed(2) %> $</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="panier-actions">
+            <a href="/produits" class="btn-continuer">Continuer mes achats</a>
+            <a href="/paiement" class="btn-payer">Procéder au paiement</a>
+        </div>
+
+    <% } %>
+</main>
+
+<%- include('components/footer') %>

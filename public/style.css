@@ -217,3 +217,113 @@ footer {
     margin-left: 1.5rem;
     opacity: 0.9;
 }
+
+/* ---------- Panier ---------- */
+.panier {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.panier h1 {
+    color: #F77F00;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid #009A44;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+}
+
+.panier-vide {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.table-panier {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.table-panier thead {
+    background-color: #F77F00;
+    color: #FFFFFF;
+}
+
+.table-panier th,
+.table-panier td {
+    padding: 0.9rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #EEE;
+}
+
+.cellule-produit {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.cellule-produit img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+    background-color: #FDF6EC;
+}
+
+.table-panier tfoot {
+    font-weight: bold;
+    background-color: #FDF6EC;
+}
+
+.total-label {
+    text-align: right;
+}
+
+.total-valeur {
+    color: #F77F00;
+    font-size: 1.2rem;
+}
+
+.btn-retirer {
+    background-color: #C0392B;
+    width: auto;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.btn-retirer:hover {
+    background-color: #A93226;
+}
+
+.panier-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.btn-continuer,
+.btn-payer {
+    text-decoration: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.btn-continuer {
+    background-color: #FFFFFF;
+    color: #F77F00;
+    border: 2px solid #F77F00;
+}
+
+.btn-payer {
+    background-color: #009A44;
+    color: #FFFFFF;
+}
+
+.btn-payer:hover {
+    background-color: #007A36;
+}

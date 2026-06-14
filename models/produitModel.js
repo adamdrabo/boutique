@@ -23,4 +23,21 @@ async function recupererProduitId(id) {
     return produits[0]
 }
 
-module.exports = { recupererProduitId, recupererProduits }
+
+async function recupererProduitsIds(ids) {
+    if (ids.length === 0) {
+        return []
+    }
+
+    const [produits] = await db.query(
+        `SELECT p.id, p.nom, p.prix, p.image_url, p.quantite_stock, c.nom AS categorie
+        FROM produits p
+        JOIN categories c ON p.categorie_id = c.id
+        WHERE p.id IN (?)`,
+        [ids]
+    )
+
+    return produits
+}
+
+module.exports = { recupererProduitId, recupererProduits, recupererProduitsIds }

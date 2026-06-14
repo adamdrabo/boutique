@@ -2,6 +2,7 @@ require('dotenv').config()
 // const db = require('./config/db')
 const produitController = require('./controllers/produitController')
 const authController = require('./controllers/authController')
+const panierController = require('./controllers/panierController')
 
 const express = require('express')
 const session = require('express-session')
@@ -37,6 +38,9 @@ app.post('/inscription', authController.inscrire);
 app.get('/connexion', authController.pageConnexion);
 app.post('/connexion', authController.connecter);
 app.get('/deconnexion', authController.deconnecter);
+app.get('/panier', panierController.afficherPanier);
+app.post('/panier/ajouter', panierController.ajouterAuPanier);
+app.post('/panier/retirer', panierController.retirerProduitPanier);
 // app.get('/', (req, res) => {
 //     res.send('Boutique Ahuntsic - serveur en marche');
 // })
