@@ -1,0 +1,73 @@
+<%- include('components/header') %>
+
+<main class="paiement">
+    <h1>Paiement</h1>
+
+    <div class="recap-commande">
+        <h2>Récapitulatif</h2>
+        <ul class="recap-liste">
+            <% articles.forEach(article => { %>
+                <li>
+                    <span><%= article.nom %> × <%= article.quantite %></span>
+                    <span><%= article.sousTotal.toFixed(2) %> $</span>
+                </li>
+            <% }) %>
+        </ul>
+        <p class="recap-total">
+            <strong>Total : <%= total.toFixed(2) %> $ CAD</strong>
+        </p>
+    </div>
+
+    <div class="zone-paypal">
+        <p>Payez en toute sécurité avec PayPal :</p>
+        <!-- Le SDK PayPal injectera les boutons ici -->
+        <div id="paypal-button-container"></div>
+        <p id="message-paiement"></p>
+    </div>
+</main>
+
+<!-- 1. Le SDK JavaScript de PayPal (client ID passé depuis le serveur) -->
+<script src="https://www.paypal.com/sdk/js?client-id=<%= paypalClientId %>&currency=CAD"></script>
+
+<!-- 2. Notre logique de paiement -->
+<script>
+    paypal.Buttons({
+        // ----- Étape A : créer l'order (appelle NOTRE serveur) -----
+        createOrder: function () {
+            return fetch('/paypal/creer-commande', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(function (response) { return response.json(); })
+            .then(function (data) { return data.id; }); // l'id d'order renvoyé par notre serveur
+        },
+
+        // ----- Étape B : après approbation, capturer (appelle NOTRE serveur) -----
+        onApprove: function (data) {
+            return fetch('/paypal/capturer-commande', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ orderID: data.orderID })
+            })
+            .then(function (response) { return response.json(); })
+            .then(function (resultat) {
+                if (resultat.statut === 'succes') {
+                    // Paiement réussi : on redirige vers la page de confirmation
+                    window.location.href = '/confirmation';
+                } else {
+                    document.getElementById('message-paiement').textContent =
+                        'Le paiement n\'a pas pu être finalisé.';
+                }
+            });
+        },
+
+        // ----- Gestion d'erreur -----
+        onError: function (err) {
+            console.error('Erreur PayPal :', err);
+            document.getElementById('message-paiement').textContent =
+                'Une erreur est survenue avec PayPal.';
+        }
+    }).render('#paypal-button-container');
+</script>
+
+<%- include('components/footer') %>
