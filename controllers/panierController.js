@@ -67,7 +67,6 @@ function retirerProduitPanier(req, res) {
     res.redirect('/panier')
 }
 
-// Augmenter la quantité d'un article du panier
 function augmenterQuantite(req, res) {
     const produitId = Number(req.body.produitId)
 
@@ -81,7 +80,6 @@ function augmenterQuantite(req, res) {
     res.redirect('/panier')
 }
 
-// Diminuer la quantité (plancher à 1 : ne descend pas sous 1)
 function diminuerQuantite(req, res) {
     const produitId = Number(req.body.produitId)
 

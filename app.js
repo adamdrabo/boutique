@@ -54,7 +54,6 @@ app.post('/paypal/creer-commande', paiementController.creerCommande);
 app.post('/paypal/capturer-commande', paiementController.capturerCommande);
 app.get('/historique', commandeController.afficherHistorique);
 
-// Dans app.js
 app.get('/confirmation', (req, res) => {
     if (!req.session.utilisateur) return res.redirect('/connexion');
     res.render('confirmation');

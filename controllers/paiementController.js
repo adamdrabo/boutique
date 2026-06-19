@@ -1,24 +1,11 @@
-// ============================================================
-// controllers/paiementController.js - Intégration PayPal (CU3)
-// ============================================================
+
 const { OrdersController } = require('@paypal/paypal-server-sdk');
 const client = require('../config/paypal');
 
 const produitModel = require('../models/produitModel');
 const commandeModel = require('../models/commandeModel');
-
-// Le contrôleur d'orders du SDK : c'est lui qui crée et capture
 const ordersController = new OrdersController(client);
 
-console.log('--- Type de ordersController ---');
-console.log(typeof ordersController);
-console.log('--- Méthodes disponibles ---');
-console.log(Object.getOwnPropertyNames(Object.getPrototypeOf(ordersController)));
-
-// ------------------------------------------------------------
-// Fonction utilitaire : reconstruit le panier enrichi depuis la session.
-// Recalcule TOUJOURS le total côté serveur (jamais de confiance au client).
-// ------------------------------------------------------------
 async function construirePanierEnrichi(req) {
     const panier = req.session.panier || [];
     if (panier.length === 0) {
@@ -46,12 +33,8 @@ async function construirePanierEnrichi(req) {
     return { articles, total };
 }
 
-// ------------------------------------------------------------
-// GET /paiement : affiche la page avec les boutons PayPal
-// ------------------------------------------------------------
 async function pagePaiement(req, res) {
     try {
-        // Sécurité : il faut être connecté pour payer (la commande a besoin d'un utilisateur)
         if (!req.session.utilisateur) {
             return res.redirect('/connexion');
         }
@@ -65,7 +48,7 @@ async function pagePaiement(req, res) {
         res.render('paiement', {
             articles: articles,
             total: total,
-            paypalClientId: process.env.PAYPAL_CLIENT_ID // pour le SDK navigateur
+            paypalClientId: process.env.PAYPAL_CLIENT_ID
         });
     } catch (err) {
         console.error('Erreur page paiement :', err);
@@ -73,9 +56,6 @@ async function pagePaiement(req, res) {
     }
 }
 
-// ------------------------------------------------------------
-// POST /paypal/creer-commande : crée l'order côté PayPal
-// ------------------------------------------------------------
 async function creerCommande(req, res) {
     try {
         const { total } = await construirePanierEnrichi(req);
@@ -97,10 +77,6 @@ async function creerCommande(req, res) {
                 ]
             }
         });
-
-        console.log('--- Réponse createOrder ---');
-        console.log(reponse.result);
-
         res.json({ id: reponse.result.id });
     } catch (err) {
         console.error('Erreur création order PayPal :', err);
@@ -108,14 +84,11 @@ async function creerCommande(req, res) {
     }
 }
 
-// ------------------------------------------------------------
-// POST /paypal/capturer-commande : capture le paiement + enregistre en BD
-// ------------------------------------------------------------
+
 async function capturerCommande(req, res) {
     try {
         const { orderID } = req.body;
 
-        // 1. Capturer le paiement chez PayPal
         const reponse = await ordersController.captureOrder({
             id: orderID,
             body: {}
@@ -123,15 +96,12 @@ async function capturerCommande(req, res) {
 
         const resultat = reponse.result;
 
-        console.log('--- Réponse captureOrder ---');
         console.log(resultat);
 
-        // 2. Vérifier que la capture a réussi
         if (resultat.status !== 'COMPLETED') {
             return res.status(400).json({ erreur: 'Paiement non complété.' });
         }
 
-        // 3. Enregistrer la commande en BD (transaction : commande + lignes + stock)
         const { articles, total } = await construirePanierEnrichi(req);
         const utilisateurId = req.session.utilisateur.id;
 
@@ -139,10 +109,9 @@ async function capturerCommande(req, res) {
             utilisateurId,
             articles,
             total,
-            resultat.id // l'id de transaction PayPal
+            resultat.id
         );
 
-        // 4. Vider le panier : la commande est passée
         req.session.panier = [];
 
         res.json({ statut: 'succes' });

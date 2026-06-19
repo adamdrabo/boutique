@@ -102,7 +102,7 @@ body {
 .carte-produit .description {
     font-size: 0.85rem;
     color: #666;
-    flex-grow: 1; /* pousse prix/bouton vers le bas : cartes alignées */
+    flex-grow: 1; 
 }
 
 .carte-produit .prix {
