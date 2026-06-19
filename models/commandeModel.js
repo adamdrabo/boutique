@@ -39,21 +39,22 @@ async function enregistrerCommande(utilisateurId, articles, total, paypalTransac
 
 async function recupererHistorique(utilisateurId) {
     const [lignes] = await db.query(
-    `SELECT c.id AS commande_id,
-        c.created_at AS date_commande,
-        c.total,
-        c.statut,
-        p.nom AS produit_nom,
-        p.image_url,
-        lc.quantite,
-        lc.prix_unitaire
-    From commandes c
-    JOIN lignes_commande lc ON lc.commande_id = c.id
-    JOIN produits p ON p.id = lc.produit_id
-    WHERE c.utilisateur_id = ?
-    ORDER BY c.created_at DESC, c.id DESC    
-    `,)
-    [utilisateurId]
+        `SELECT c.id AS commande_id,
+                c.created_at AS date_commande,
+                c.total,
+                c.statut,
+                p.nom AS produit_nom,
+                p.image_url,
+                lc.quantite,
+                lc.prix_unitaire
+         FROM commandes c
+         JOIN lignes_commande lc ON lc.commande_id = c.id
+         JOIN produits p ON p.id = lc.produit_id
+         WHERE c.utilisateur_id = ?
+         ORDER BY c.created_at DESC, c.id DESC`,
+        [utilisateurId]   // ← LE paramètre manquant
+    );
+    return lignes;
 }
 
 module.exports = { enregistrerCommande, recupererHistorique}

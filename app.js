@@ -6,6 +6,8 @@ const produitController = require('./controllers/produitController')
 const authController = require('./controllers/authController')
 const panierController = require('./controllers/panierController')
 const paiementController = require('./controllers/paiementController');
+const commandeController = require('./controllers/commandeController');
+
 
 const express = require('express')
 const session = require('express-session')
@@ -48,6 +50,8 @@ app.post('/panier/retirer', panierController.retirerProduitPanier);
 app.get('/paiement', paiementController.pagePaiement);
 app.post('/paypal/creer-commande', paiementController.creerCommande);
 app.post('/paypal/capturer-commande', paiementController.capturerCommande);
+app.get('/historique', commandeController.afficherHistorique);
+
 // Dans app.js
 app.get('/confirmation', (req, res) => {
     if (!req.session.utilisateur) return res.redirect('/connexion');

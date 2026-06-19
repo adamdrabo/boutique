@@ -415,3 +415,105 @@ footer {
     justify-content: center;
     margin-top: 1.5rem;
 }
+
+/* ---------- Historique ---------- */
+.historique {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.historique h1 {
+    color: #F77F00;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid #009A44;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+}
+
+.historique-vide {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.carte-commande {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.commande-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #FDF6EC;
+    padding-bottom: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.commande-numero {
+    font-weight: bold;
+    color: #F77F00;
+    font-size: 1.1rem;
+    margin-right: 0.8rem;
+}
+
+.commande-date {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.commande-statut {
+    background-color: #009A44;
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    text-transform: capitalize;
+}
+
+.commande-articles {
+    list-style: none;
+}
+
+.commande-articles li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #F5F5F5;
+}
+
+.commande-articles img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 6px;
+    background-color: #FDF6EC;
+}
+
+.article-nom {
+    flex-grow: 1;
+}
+
+.article-qte {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.article-prix {
+    font-weight: 600;
+    color: #2B2B2B;
+    min-width: 70px;
+    text-align: right;
+}
+
+.commande-total {
+    text-align: right;
+    margin-top: 0.8rem;
+    font-size: 1.1rem;
+    color: #F77F00;
+}

@@ -1,0 +1,43 @@
+<%- include('components/header') %>
+
+<main class="historique">
+    <h1>Mes commandes</h1>
+
+    <% if (commandes.length === 0) { %>
+        <p class="historique-vide">Vous n'avez pas encore passé de commande.</p>
+        <a href="/produits" class="btn-continuer">Découvrir nos produits</a>
+    <% } else { %>
+
+        <% commandes.forEach(commande => { %>
+            <article class="carte-commande">
+                <div class="commande-entete">
+                    <div>
+                        <span class="commande-numero">Commande #<%= commande.id %></span>
+                        <span class="commande-date">
+                            <%= new Date(commande.date).toLocaleDateString('fr-CA') %>
+                        </span>
+                    </div>
+                    <span class="commande-statut"><%= commande.statut %></span>
+                </div>
+
+                <ul class="commande-articles">
+                    <% commande.articles.forEach(article => { %>
+                        <li>
+                            <img src="<%= article.image_url %>" alt="<%= article.nom %>">
+                            <span class="article-nom"><%= article.nom %></span>
+                            <span class="article-qte">× <%= article.quantite %></span>
+                            <span class="article-prix"><%= article.prix_unitaire %> $</span>
+                        </li>
+                    <% }) %>
+                </ul>
+
+                <div class="commande-total">
+                    Total : <strong><%= commande.total %> $ CAD</strong>
+                </div>
+            </article>
+        <% }) %>
+
+    <% } %>
+</main>
+
+<%- include('components/footer') %>
