@@ -25,9 +25,23 @@
                             <img src="<%= article.image_url %>" alt="<%= article.nom %>">
                             <span><%= article.nom %></span>
                         </td>
-                        <td><%= article.prix.toFixed(2) %> $</td>
-                        <td><%= article.quantite %></td>
-                        <td><%= article.sousTotal.toFixed(2) %> $</td>
+                        <td><%= article.prix.toFixed(2) %>&nbsp;$</td>
+                        <td>
+    <div class="quantite-controls">
+        <form action="/panier/diminuer" method="post">
+            <input type="hidden" name="produitId" value="<%= article.id %>">
+            <button type="submit" class="btn-qte">−</button>
+        </form>
+
+        <span class="qte-valeur"><%= article.quantite %></span>
+
+        <form action="/panier/augmenter" method="post">
+            <input type="hidden" name="produitId" value="<%= article.id %>">
+            <button type="submit" class="btn-qte">+</button>
+        </form>
+    </div>
+</td>
+                        <td><%= article.sousTotal.toFixed(2) %>&nbsp;$</td>
                         <td>
                             <form action="/panier/retirer" method="post">
                                 <input type="hidden" name="produitId" value="<%= article.id %>">
@@ -40,7 +54,7 @@
             <tfoot>
                 <tr>
                     <td colspan="3" class="total-label">Total</td>
-                    <td class="total-valeur"><%= total.toFixed(2) %> $</td>
+                    <td class="total-valeur"><%= total.toFixed(2) %>&nbsp;$</td>
                     <td></td>
                 </tr>
             </tfoot>

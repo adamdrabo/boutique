@@ -286,6 +286,7 @@ footer {
 .total-valeur {
     color: #F77F00;
     font-size: 1.2rem;
+    white-space: nowrap;
 }
 
 .btn-retirer {
@@ -516,4 +517,44 @@ footer {
     margin-top: 0.8rem;
     font-size: 1.1rem;
     color: #F77F00;
+}
+
+
+/* ---------- Contrôles quantité (panier) ---------- */
+.quantite-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantite-controls form {
+    margin: 0;
+}
+
+.btn-qte {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    line-height: 1;
+    background-color: #FFFFFF;
+    color: #F77F00;
+    border: 2px solid #F77F00;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-qte:hover {
+    background-color: #F77F00;
+    color: #FFFFFF;
+}
+
+.qte-valeur {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 600;
 }

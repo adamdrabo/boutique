@@ -67,4 +67,32 @@ function retirerProduitPanier(req, res) {
     res.redirect('/panier')
 }
 
-module.exports = { ajouterAuPanier, afficherPanier, retirerProduitPanier}
+// Augmenter la quantité d'un article du panier
+function augmenterQuantite(req, res) {
+    const produitId = Number(req.body.produitId)
+
+    const ligne = (req.session.panier || []).find(
+        l => l.produitId === produitId
+    )
+    if (ligne) {
+        ligne.quantite += 1
+    }
+
+    res.redirect('/panier')
+}
+
+// Diminuer la quantité (plancher à 1 : ne descend pas sous 1)
+function diminuerQuantite(req, res) {
+    const produitId = Number(req.body.produitId)
+
+    const ligne = (req.session.panier || []).find(
+        l => l.produitId === produitId
+    )
+    if (ligne && ligne.quantite > 1) {
+        ligne.quantite -= 1
+    }
+
+    res.redirect('/panier')
+}
+
+module.exports = { ajouterAuPanier, afficherPanier, retirerProduitPanier, augmenterQuantite, diminuerQuantite}

@@ -47,6 +47,8 @@ app.get('/deconnexion', authController.deconnecter);
 app.get('/panier', panierController.afficherPanier);
 app.post('/panier/ajouter', panierController.ajouterAuPanier);
 app.post('/panier/retirer', panierController.retirerProduitPanier);
+app.post('/panier/augmenter', panierController.augmenterQuantite)
+app.post('/panier/diminuer', panierController.diminuerQuantite)
 app.get('/paiement', paiementController.pagePaiement);
 app.post('/paypal/creer-commande', paiementController.creerCommande);
 app.post('/paypal/capturer-commande', paiementController.capturerCommande);
